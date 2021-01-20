@@ -1,8 +1,9 @@
 package co.hospital.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 @RedisHash("Atencion")
@@ -12,8 +13,9 @@ public class Atencion implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -781846590301399231L;
+	@Id
 	private Long id;
-	private Date fechaAtencion;
+	private LocalDateTime fechaAtencion;
 	private String identificacion;
 	private String nombreEps;
 	private Double valor;
@@ -26,11 +28,11 @@ public class Atencion implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaAtencion() {
+	public LocalDateTime getFechaAtencion() {
 		return fechaAtencion;
 	}
 
-	public void setFechaAtencion(Date fechaAtencion) {
+	public void setFechaAtencion(LocalDateTime fechaAtencion) {
 		this.fechaAtencion = fechaAtencion;
 	}
 

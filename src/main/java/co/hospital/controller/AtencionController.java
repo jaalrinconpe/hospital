@@ -1,23 +1,25 @@
 package co.hospital.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.hospital.model.Atencion;
 import co.hospital.services.AtencionService;
 
-@RestController(value = "/atencion")
+@RestController
+@RequestMapping(value = "/atencion")
 public class AtencionController {
 
 	@Autowired
 	private AtencionService atencionService;
 
-	@GetMapping(value = "/listarAtenciones", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/listar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Iterable<Atencion> buscarAtenciones() {
 		return atencionService.buscarAtenciones();
 	}
@@ -28,11 +30,11 @@ public class AtencionController {
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Atencion buscarPorId(@Param("id") Long idAtencion) {
+	public Atencion buscarPorId(@PathVariable("id") Long idAtencion) {
 		return atencionService.buscarPorId(idAtencion);
 	}
 	
-	@PostMapping(value = "/nueva", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/eliminar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void eliminarAtencion(@RequestBody Atencion atencion) {
 		atencionService.eliminarAtencion(atencion);
 	}
